@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio | group  6 InforTL4</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            light: '#1e293b',
+                            primary: '#3b82f6',
+                            secondary: '#8b5cf6',
+                            accent: '#06b6d4'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #3b82f6, #8b5cf6, #06b6d4);
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Reveal Animation on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image hover zoom */
+        .img-zoom:hover img {
+            transform: scale(1.05);
+        }
+        .img-zoom img {
+            transition: transform 0.5s ease;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-brand-primary selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-2xl font-bold tracking-tighter text-white flex items-center gap-2">
+                        <i data-lucide="terminal" class="text-brand-primary"></i>
+                        <span class="text-brand-primary">INFORTL4</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-gray-300 hover:text-white hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="text-gray-300 hover:text-white hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">About Us</a>
+                        <a href="#projects" class="text-gray-300 hover:text-white hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                        <a href="#galleries" class="text-gray-300 hover:text-white hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Galleries</a>
+                        <a href="#contact" class="bg-brand-primary hover:bg-blue-600 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-blue-500/30">Contact Us</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-brand-light">Home</a>
+                <a href="#about" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-brand-light">About Us</a>
+                <a href="#projects" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-brand-light">Projects</a>
+                <a href="#galleries" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-brand-light">Galleries</a>
+                <a href="#contact" class="mobile-link block px-3 py-2 mt-4 text-center rounded-md text-base font-medium bg-brand-primary text-white hover:bg-blue-600">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. HOME SECTION -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-20 left-10 w-72 h-72 bg-brand-primary rounded-full mix-blend-multiply filter blur-[128px] opacity-50 animate-blob"></div>
+        <div class="absolute top-40 right-10 w-72 h-72 bg-brand-secondary rounded-full mix-blend-multiply filter blur-[128px] opacity-50 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-40 w-72 h-72 bg-brand-accent rounded-full mix-blend-multiply filter blur-[128px] opacity-50 animate-blob animation-delay-4000"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-brand-accent text-sm font-medium mb-8 reveal">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-accent"></span>
+                </span>
+                We are Creative Team
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight reveal" style="transition-delay: 100ms;">
+                Welcome to <br>
+                <span class="text-gradient">Kelompok 6 InforTL4</span>
+            </h1>
+            <p class="mt-4 text-xl text-gray-400 max-w-2xl mx-auto mb-10 reveal" style="transition-delay: 200ms;">
+                Kami adalah sekelompok mahasiswa yang antusias dalam teknologi, desain, dan pengembangan sistem. Mengubah ide menjadi realitas digital.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="transition-delay: 300ms;">
+                <a href="#about" class="px-8 py-4 bg-brand-primary hover:bg-blue-600 text-white rounded-full font-medium transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2">
+                    Kenali Kami <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                </a>
+                <a href="#projects" class="px-8 py-4 bg-transparent border border-gray-600 hover:border-gray-400 hover:bg-gray-800 text-white rounded-full font-medium transition-all flex items-center justify-center gap-2">
+                    Lihat Karya
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. ABOUT US SECTION -->
+    <section id="about" class="py-24 bg-brand-dark relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Tim <span class="text-brand-accent">Kami</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-brand-primary to-brand-accent mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">Orang-orang hebat di balik kesuksesan setiap project Kelompok 6 InforTL4.</p>
+            </div>
+
+            <!-- Team Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Member 1: Naysila Amelia -->
+                <div class="bg-brand-light rounded-2xl overflow-hidden shadow-xl hover:shadow-brand-primary/20 transition-all duration-300 transform hover:-translate-y-2 border border-gray-800 reveal img-zoom">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/d/1KO4E1v8ytC1QvHGjkcNYgC01C5M0DQKp" 
+                             onerror="this.src='https://ui-avatars.com/api/?name=Naysila+Amelia&background=3b82f6&color=fff&size=200'" 
+                             class="profile-img w-full h-full object-cover object-center" 
+                             alt="Naysila Amelia">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-light to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-6 relative -mt-10">
+                        <h3 class="text-xl font-bold text-white mb-1">Naysila Amelia</h3>
+                        <p class="text-brand-accent text-sm mb-4 font-medium">Anggota Kelompok 6</p>
+                        <div class="flex space-x-3 text-gray-400">
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 2: Wulan Cahyani -->
+                <div class="bg-brand-light rounded-2xl overflow-hidden shadow-xl hover:shadow-brand-secondary/20 transition-all duration-300 transform hover:-translate-y-2 border border-gray-800 reveal img-zoom" style="transition-delay: 100ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/d/1rvHRaq_EGMY6FYR317iW-g2gMs_fP7Qv" 
+                             onerror="this.src='https://ui-avatars.com/api/?name=Wulan+Cahyani&background=8b5cf6&color=fff&size=200'" 
+                             class="profile-img w-full h-full object-cover object-center" 
+                             alt="Wulan Cahyani">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-light to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-6 relative -mt-10">
+                        <h3 class="text-xl font-bold text-white mb-1">Wulan Cahyani</h3>
+                        <p class="text-brand-accent text-sm mb-4 font-medium">Anggota Kelompok 6</p>
+                        <div class="flex space-x-3 text-gray-400">
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 3: Eriyana -->
+                <div class="bg-brand-light rounded-2xl overflow-hidden shadow-xl hover:shadow-brand-accent/20 transition-all duration-300 transform hover:-translate-y-2 border border-gray-800 reveal img-zoom" style="transition-delay: 200ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/d/1599SaBvqeuD3HqJWK9873u33EZuoLC8A" 
+                             onerror="this.src='https://ui-avatars.com/api/?name=Eriyana&background=06b6d4&color=fff&size=200'" 
+                             class="profile-img w-full h-full object-cover object-center" 
+                             alt="Eriyana">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-light to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-6 relative -mt-10">
+                        <h3 class="text-xl font-bold text-white mb-1">Eriyana</h3>
+                        <p class="text-brand-accent text-sm mb-4 font-medium">Anggota Kelompok 6</p>
+                        <div class="flex space-x-3 text-gray-400">
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 4: Anisa Agustianingsih -->
+                <div class="bg-brand-light rounded-2xl overflow-hidden shadow-xl hover:shadow-pink-500/20 transition-all duration-300 transform hover:-translate-y-2 border border-gray-800 reveal img-zoom" style="transition-delay: 300ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/d/1ojLp_h0txZm8cQuzr9uYdm3v-a3FLjI5" 
+                             onerror="this.src='https://ui-avatars.com/api/?name=Anisa+Agustianingsih&background=ec4899&color=fff&size=200'" 
+                             class="profile-img w-full h-full object-cover object-top" 
+                             alt="Anisa Agustianingsih">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-light to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-6 relative -mt-10">
+                        <h3 class="text-xl font-bold text-white mb-1 truncate">Anisa Agustianingsih</h3>
+                        <p class="text-brand-accent text-sm mb-4 font-medium">Anggota Kelompok 6</p>
+                        <div class="flex space-x-3 text-gray-400">
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 5: Syafira Manjani -->
+                <div class="bg-brand-light rounded-2xl overflow-hidden shadow-xl hover:shadow-yellow-500/20 transition-all duration-300 transform hover:-translate-y-2 border border-gray-800 reveal img-zoom" style="transition-delay: 400ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/d/1rf1t0FYc-x2q11_ufF98hOBjiadZJhuZ" 
+                             onerror="this.src='https://ui-avatars.com/api/?name=Syafira+Manjani&background=f59e0b&color=fff&size=200'" 
+                             class="profile-img w-full h-full object-cover object-top" 
+                             alt="Syafira Manjani">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-light to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-6 relative -mt-10">
+                        <h3 class="text-xl font-bold text-white mb-1 truncate">Syafira Manjani</h3>
+                        <p class="text-brand-accent text-sm mb-4 font-medium">Anggota Kelompok 6</p>
+                        <div class="flex space-x-3 text-gray-400">
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 6: Tri Ayu Syaharani -->
+                <div class="bg-brand-light rounded-2xl overflow-hidden shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 transform hover:-translate-y-2 border border-gray-800 reveal img-zoom" style="transition-delay: 500ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/d/1sXmYfxAFZEYi8pEaGOA6FaOYfSQ_fCKO" 
+                             onerror="this.src='https://ui-avatars.com/api/?name=Tri+Ayu+Syaharani&background=10b981&color=fff&size=200'" 
+                             class="profile-img w-full h-full object-cover object-top" 
+                             alt="Tri Ayu Syaharani">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-light to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-6 relative -mt-10">
+                        <h3 class="text-xl font-bold text-white mb-1 truncate">Tri Ayu Syaharani</h3>
+                        <p class="text-brand-accent text-sm mb-4 font-medium">Anggota Kelompok 6</p>
+                        <div class="flex space-x-3 text-gray-400">
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 7: Ade Fitriyani -->
+                <div class="bg-brand-light rounded-2xl overflow-hidden shadow-xl hover:shadow-indigo-500/20 transition-all duration-300 transform hover:-translate-y-2 border border-gray-800 reveal img-zoom" style="transition-delay: 600ms;">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/d/1rwou3HtOugNH_NgxIwTJxtrK8cCIszuA" 
+                             onerror="this.src='https://ui-avatars.com/api/?name=Ade+Fitriyani&background=6366f1&color=fff&size=200'" 
+                             class="profile-img w-full h-full object-cover object-top" 
+                             alt="Ade Fitriyani">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-light to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-6 relative -mt-10">
+                        <h3 class="text-xl font-bold text-white mb-1 truncate">Ade Fitriyani</h3>
+                        <p class="text-brand-accent text-sm mb-4 font-medium">Anggota Kelompok 6</p>
+                        <div class="flex space-x-3 text-gray-400">
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PROJECTS SECTION -->
+    <section id="projects" class="py-24 bg-[#0b1121] relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Proyek <span class="text-brand-primary">Terbaru</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-brand-primary to-brand-secondary mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">Beberapa hasil kerja dan eksplorasi yang telah kami selesaikan.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-brand-dark rounded-2xl overflow-hidden border border-gray-800 group reveal">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Web Development" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <a href="#" class="w-10 h-10 rounded-full bg-brand-primary flex items-center justify-center text-white"><i data-lucide="external-link" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 bg-blue-500/10 text-brand-primary text-xs font-semibold rounded-full border border-blue-500/20">Web App</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Sistem Informasi Akademik</h3>
+                        <p class="text-gray-400 text-sm mb-4">Pengembangan platform sistem informasi untuk manajemen data mahasiswa, dosen, dan jadwal kelas secara real-time.</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-brand-dark rounded-2xl overflow-hidden border border-gray-800 group reveal" style="transition-delay: 100ms;">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="UI/UX Design" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <a href="#" class="w-10 h-10 rounded-full bg-brand-secondary flex items-center justify-center text-white"><i data-lucide="external-link" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 bg-purple-500/10 text-brand-secondary text-xs font-semibold rounded-full border border-purple-500/20">UI/UX Design</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Redesign Aplikasi Mobile</h3>
+                        <p class="text-gray-400 text-sm mb-4">Pembuatan antarmuka pengguna yang modern dan interaktif untuk meningkatkan pengalaman pengguna (UX) aplikasi e-commerce.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-brand-dark rounded-2xl overflow-hidden border border-gray-800 group reveal" style="transition-delay: 200ms;">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Data Analysis" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <a href="#" class="w-10 h-10 rounded-full bg-brand-accent flex items-center justify-center text-white"><i data-lucide="external-link" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 bg-cyan-500/10 text-brand-accent text-xs font-semibold rounded-full border border-cyan-500/20">Data Science</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Analisis Data Dashboard</h3>
+                        <p class="text-gray-400 text-sm mb-4">Visualisasi data kompleks menjadi dashboard interaktif untuk mempermudah pengambilan keputusan bagi stakeholder.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. GALLERIES SECTION -->
+    <section id="galleries" class="py-24 bg-brand-dark relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Galeri <span class="text-brand-secondary">Kegiatan</span></h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-brand-secondary to-pink-500 rounded-full mb-4"></div>
+                    <p class="text-gray-400 max-w-xl">Dokumentasi momen berharga, diskusi, dan kolaborasi dari Kelompok 6 InforTL4.</p>
+                </div>
+                <button class="mt-4 md:mt-0 flex items-center gap-2 text-brand-accent hover:text-white transition-colors group">
+                    Lihat Semua <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+
+            <!-- Masonry-style Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[250px]">
+                <!-- Foto Galeri 1 -->
+                <div class="col-span-2 row-span-2 rounded-2xl overflow-hidden relative group reveal">
+                    <img src="https://lh3.googleusercontent.com/d/1vJeLR-ur9sl7g5-y0mzAotCKB9McVU6F" 
+                         alt="Kegiatan Tim 1" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <p class="text-white font-medium">Dokumentasi Tim - Momen 1</p>
+                    </div>
+                </div>
+                <!-- Foto Galeri 2 -->
+                <div class="rounded-2xl overflow-hidden relative group reveal" style="transition-delay: 100ms;">
+                    <img src="https://lh3.googleusercontent.com/d/1tMU2SKugfHIs322wSWMM8B2WSuBCHed2" 
+                         alt="Kegiatan Tim 2" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <!-- Foto Galeri 3 -->
+                <div class="rounded-2xl overflow-hidden relative group reveal" style="transition-delay: 200ms;">
+                    <img src="https://lh3.googleusercontent.com/d/1SCCiY8f7f3p25gexC1Hh8d9Iye8D52vX" 
+                         alt="Kegiatan Tim 3" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <!-- Foto Galeri 4 -->
+                <div class="col-span-2 rounded-2xl overflow-hidden relative group reveal" style="transition-delay: 100ms;">
+                    <img src="https://lh3.googleusercontent.com/d/1XfTx6MVpewR1TXHoPffwZ4jGBX5MmIL1" 
+                         alt="Kegiatan Tim 4" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <p class="text-white font-medium">Dokumentasi Tim - Momen 2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CONTACT US SECTION -->
+    <section id="contact" class="py-24 bg-[#0b1121] relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                
+                <!-- Contact Info -->
+                <div class="reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Hubungi <spyan class="text-brand-primary">Kami</span></h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-brand-primary to-brand-accent rounded-full mb-6"></div>
+                    <p class="text-gray-400 mb-10">Punya pertanyaan, tawaran proyek, atau ingin sekadar menyapa? Jangan ragu untuk mengirimkan pesan kepada tim kami.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center text-brand-primary shrink-0 border border-blue-500/20">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium mb-1">Lokasi</h4>
+                                <p class="text-gray-400 text-sm">SMAN 45 JAKARTA<br>InforTL4, Ruang Lab 06</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center text-brand-secondary shrink-0 border border-purple-500/20">
+                                <i data-lucide="mail"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium mb-1">Email</h4>
+                                <p class="text-gray-400 text-sm">syafiramanjani94@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-brand-light p-8 rounded-3xl border border-gray-800 shadow-2xl reveal" style="transition-delay: 200ms;">
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-300">Nama Lengkap</label>
+                                <input type="text" required class="w-full bg-brand-dark border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="syafira manjani">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-300">Email Address</label>
+                                <input type="email" required class="w-full bg-brand-dark border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="syafiramanjani94@gmail.com">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-300">Subjek</label>
+                            <input type="text" required class="w-full bg-brand-dark border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors" placeholder="Halo Kelompok 6!">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-gray-300">Pesan</label>
+                            <textarea rows="4" required class="w-full bg-brand-dark border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors resize-none" placeholder="Tuliskan pesan Anda di sini..."></textarea>
+                        </div>
+                        
+                        <!-- Success Message Box (Hidden by default) -->
+                        <div id="successMsg" class="hidden bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-3 rounded-xl flex items-center gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                            <span class="text-sm">Pesan berhasil dikirim! Kami akan segera merespons.</span>
+                        </div>
+
+                        <button type="submit" class="w-full bg-brand-primary hover:bg-blue-600 text-white py-3.5 rounded-xl font-medium transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2">
+                            Kirim Pesan <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark border-t border-gray-800 py-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+            <a href="#home" class="text-xl font-bold tracking-tighter text-white flex items-center gap-2 mb-4">
+                <i data-lucide="terminal" class="text-brand-primary w-5 h-5"></i>
+                Infor<span class="text-brand-primary">TL4</span>
+            </a>
+            <p class="text-gray-500 text-sm">
+                &copy; <span id="year"></span> Kelompok 6 InforTL4. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Script for Interactions -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Sticky Navbar effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-lg', 'border-b', 'border-gray-800');
+            } else {
+                navbar.classList.remove('shadow-lg', 'border-b', 'border-gray-800');
+            }
+        });
+
+        // Scroll Reveal Animation via Intersection Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: stop observing once revealed
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Form Submit Simulation
+        const contactForm = document.getElementById('contactForm');
+        const successMsg = document.getElementById('successMsg');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show success message
+            successMsg.classList.remove('hidden');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
